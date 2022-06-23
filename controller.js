@@ -86,7 +86,6 @@ class Controller {
 
         const head  = document.getElementsByTagName('head')[0];
         const link  = document.createElement('link');
-        link.id   = cssId;
         link.rel  = 'stylesheet';
         link.type = 'text/css';
         link.href = 'controller-styles.css';
