@@ -1,0 +1,29 @@
+/* Controller */
+
+#controller {
+    z-index: 2;
+    width: 100px;
+    margin-left: 10px;
+    position: fixed;
+    left: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Buttons */
+
+#controller>button {
+    cursor: pointer;
+    padding: 2px;
+    border: 0;
+    background-color: #1f1f1f;
+    color: #ebebeb;
+    font-size: 11px;
+}
+
+#controller>button:hover {
+    background-color: #1C0600;
+    border-left: 1px solid red;
+}
+
