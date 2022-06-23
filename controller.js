@@ -55,7 +55,7 @@ class Controller {
         this.toHandleEvents(timeline);
         this.showTimelineLength(timeline);
         this.addCss();
-        this.positionControlls(controls);
+        this.positionControlls(controls, container);
     }
 
     // create buttons
