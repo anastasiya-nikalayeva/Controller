@@ -88,7 +88,7 @@ class Controller {
         const link  = document.createElement('link');
         link.rel  = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'controller-styles.css';
+        link.href = 'https://anastasiya-nikalayeva.github.io/Controller/controller-styles.css';
         link.media = 'all';
         head.appendChild(link);
     }
