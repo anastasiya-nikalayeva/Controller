@@ -72,8 +72,8 @@ class Controller {
     }
 
     // position controlls
-    positionControlls = (controls) => {
-        return controls.style.left = wrapper.offsetWidth + 'px';
+    positionControlls = (controls, container) => {
+        return controls.style.left = container.offsetWidth + 'px';
     }
 
     // show timeline's length
