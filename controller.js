@@ -83,7 +83,15 @@ class Controller {
 
     // link css
     addCss = () => {
-        return document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", "<link rel='stylesheet' type='text/css' href='controller-styles.css'>");
+
+        const head  = document.getElementsByTagName('head')[0];
+        const link  = document.createElement('link');
+        link.id   = cssId;
+        link.rel  = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'controller-styles.css';
+        link.media = 'all';
+        head.appendChild(link);
     }
 
     // handle button's events
