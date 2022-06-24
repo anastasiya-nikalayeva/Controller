@@ -2,9 +2,8 @@
 class Controller {
 
     constructor({ container, timeline, play = true, pause = true, reverse = true, restart = true, fastSpeed = true, normalSpeed = true }) {
-        const controls = document.createElement('div')
-        controls.setAttribute('id', 'controller')
-        container.appendChild(controls)
+        container.insertAdjacentHTML('afterend', `<div id='controller'></div>`)
+        const controls = document.querySelector('#controller')
 
         this.play = play;
         this.pause = pause;
@@ -83,7 +82,6 @@ class Controller {
 
     // link css
     addCss = () => {
-
         const head  = document.getElementsByTagName('head')[0];
         const link  = document.createElement('link');
         link.rel  = 'stylesheet';
