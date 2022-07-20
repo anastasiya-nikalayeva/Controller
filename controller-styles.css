@@ -27,3 +27,7 @@
     border-left: 1px solid red;
 }
 
+#controller>#hideControlls {
+    background-color: #585858;
+    border: none;
+}

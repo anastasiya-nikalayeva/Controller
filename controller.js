@@ -1,9 +1,10 @@
 
 class Controller {
 
-    constructor({ container, timeline, play = true, pause = true, reverse = true, restart = true, fastSpeed = true, normalSpeed = true }) {
+    constructor({ container, timeline, play = true, pause = true, reverse = true, restart = true, fastSpeed = true, normalSpeed = true, hideControlls = true  }) {
         container.insertAdjacentHTML('afterend', `<div id='controller'></div>`)
         const controls = document.querySelector('#controller')
+        controls.classList.add("active")
 
         this.play = play;
         this.pause = pause;
@@ -11,6 +12,7 @@ class Controller {
         this.restart = restart;
         this.fastSpeed = fastSpeed;
         this.normalSpeed = normalSpeed;
+        this.hideControlls = hideControlls;
 
         let arr = [
             {
@@ -48,10 +50,16 @@ class Controller {
                 text: 'normalSpeed',
                 isVisible: this.normalSpeed
             },
+
+            {
+                id: 'hideControlls',
+                text: '▲',
+                isVisible: this.hideControlls
+            },
         ]
 
         this.createButtons(arr, controls);
-        this.toHandleEvents(timeline);
+        this.toHandleEvents(timeline, controls);
         this.showTimelineLength(timeline);
         this.addCss();
         this.positionControlls(controls, container);
@@ -92,7 +100,7 @@ class Controller {
     }
 
     // handle button's events
-    toHandleEvents = (timeline) => {
+    toHandleEvents = (timeline, controls) => {
         if (this.play) {
             play.addEventListener("click", function () { toPlay(timeline) });
 
@@ -147,6 +155,27 @@ class Controller {
                 timeline.timeScale(1);
             }
 
+        }
+
+        if (this.hideControlls) {
+            hideControlls.addEventListener("click", function () { toHideControlls(controls) });
+
+            function toHideControlls(controls) {
+
+                if (!controls.classList.contains("active")) {
+
+                    gsap.to(controls, 0.5, { y: 0, x: 0 });
+                    controls.classList.add("active");
+                    hideControlls.innerHTML = '▲'
+
+                } else {
+
+                    gsap.to(controls, 0.5, { y: - (controls.offsetHeight * (controls.childNodes.length - 1) / controls.childNodes.length), x: 0 });
+                    controls.classList.remove("active");
+                    hideControlls.innerHTML = '▼'
+                }
+
+            }
         }
 
     }
