@@ -1,7 +1,7 @@
 
 class Controller {
 
-    constructor({ container, timeline, play = true, pause = true, reverse = true, restart = true, fastSpeed = true, normalSpeed = true, hideControlls = true  }) {
+    constructor({ container, timeline = gsap.globalTimeline, play = true, pause = true, reverse = true, restart = true, fastSpeed = true, normalSpeed = true, hideControlls = true  }) {
         container.insertAdjacentHTML('afterend', `<div id='controller'></div>`)
         const controls = document.querySelector('#controller')
         controls.classList.add("active")
