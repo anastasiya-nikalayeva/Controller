@@ -1,7 +1,7 @@
 
 class Controller {
 
-    constructor({ container, timeline = gsap.globalTimeline, play = true, pause = true, reverse = true, restart = true, fastSpeed = true, normalSpeed = true, hideControlls = true  }) {
+    constructor({ container, timeline = gsap.globalTimeline, play = true, pause = true, reverse = true, restart = true, fastSpeed = true, normalSpeed = true, range = true, hideControlls = true }) {
         container.insertAdjacentHTML('afterend', `<div id='controller'></div>`)
         const controls = document.querySelector('#controller')
         controls.classList.add("active")
@@ -12,6 +12,7 @@ class Controller {
         this.restart = restart;
         this.fastSpeed = fastSpeed;
         this.normalSpeed = normalSpeed;
+        this.range = range;
         this.hideControlls = hideControlls;
 
         let arr = [
@@ -52,6 +53,11 @@ class Controller {
             },
 
             {
+                id: 'range',
+                isVisible: this.range
+            },
+
+            {
                 id: 'hideControlls',
                 text: '▲',
                 isVisible: this.hideControlls
@@ -63,6 +69,8 @@ class Controller {
         this.showTimelineLength(timeline);
         this.addCss();
         this.positionControlls(controls, container);
+        this.updateRange(timeline);
+
     }
 
     // create buttons
@@ -70,6 +78,11 @@ class Controller {
         return (
             arr.map((panel) => {
                 if (panel.isVisible) {
+                    if (panel.id == 'range') {
+                        return (
+                            controls.insertAdjacentHTML('beforeend', `<input type='range' min='0' max='1' step='0.001' value='0' id=${panel.id}></button>`)
+                        )
+                    }
                     return (
                         controls.insertAdjacentHTML('beforeend', `<button id=${panel.id}>${panel.text}</button>`)
                     )
@@ -90,9 +103,9 @@ class Controller {
 
     // link css
     addCss = () => {
-        const head  = document.getElementsByTagName('head')[0];
-        const link  = document.createElement('link');
-        link.rel  = 'stylesheet';
+        const head = document.getElementsByTagName('head')[0];
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = 'https://anastasiya-nikalayeva.github.io/Controller/controller-styles.css';
         link.media = 'all';
@@ -157,6 +170,8 @@ class Controller {
 
         }
 
+
+
         if (this.hideControlls) {
             hideControlls.addEventListener("click", function () { toHideControlls(controls) });
 
@@ -178,6 +193,21 @@ class Controller {
             }
         }
 
+    }
+
+    updateRange = (timeline) => {
+        timeline.eventCallback("onUpdate", handlerTlUpdate)
+
+        function handlerTlUpdate() {
+            let range = document.getElementById('range');
+            range.value = timeline.progress();
+
+            range.addEventListener("input", function () { handleUserInteraction() });
+            function handleUserInteraction() {
+                timeline.pause();
+                timeline.progress(range.value);
+            }
+        }
     }
 
 }
