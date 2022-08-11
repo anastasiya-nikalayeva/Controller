@@ -25,7 +25,7 @@
 
 #controller>button:hover {
     background-color: #1C0600;
-    border-left: 1px solid red;
+    border-left: 2px solid #00CE96;
 }
 
 #controller>#hideControlls {
@@ -37,7 +37,7 @@
 #controller>input[type="range"] {
     -webkit-appearance: none;
     background: #1f1f1f;
-    border: 1px solid rgba(255, 0, 0, 0.3);
+    border: 1px solid rgba(0,206,150, 0.3);
     background-repeat: no-repeat;
     margin: 0;
 }
@@ -47,7 +47,7 @@
     height: 10px;
     width: 10px;
     border-radius: 50%;
-    background: red;
+    background: #00CE96;
     cursor: ew-resize;
     box-shadow: 0 0 2px 0 #555;
 }
