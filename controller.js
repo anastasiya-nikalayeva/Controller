@@ -80,9 +80,9 @@ class Controller {
                 if (panel.isVisible) {
                     if (panel.id == 'range') {
                         return (
-                            controls.insertAdjacentHTML('beforeend', `<input type='range' min='0' max='1' step='0.001' value='0' id=${panel.id}></button>`)
+                            controls.insertAdjacentHTML('beforeend', `<div class='rangeWrapper'><input type='range' min='0' max='1' step='0.001' value='0' id=${panel.id}></button><div id='time'></div></div>`)
                         )
-                    }
+                    } 
                     return (
                         controls.insertAdjacentHTML('beforeend', `<button id=${panel.id}>${panel.text}</button>`)
                     )
@@ -207,6 +207,9 @@ class Controller {
                 timeline.pause();
                 timeline.progress(range.value);
             }
+
+            let time = document.getElementById('time');
+            time.innerHTML = timeline.time().toFixed(2);
         }
     }
 
